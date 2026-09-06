@@ -28,9 +28,9 @@ export default function ShareHero() {
             alt="Creators filming among Himalayan peaks and prayer flags"
             className="h-[420px] w-full object-cover sm:h-[520px] md:h-[600px]"
           />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 top-1/3 bg-gradient-to-t from-stone-950/90 via-stone-950/45 to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 bottom-1/3 bg-gradient-to-b from-stone-950/90 via-stone-950/45 to-transparent" />
 
-          <div className="absolute inset-x-0 bottom-0 grid gap-4 p-4 sm:grid-cols-3 sm:p-6 md:p-8">
+          <div className="absolute inset-x-0 top-0 grid gap-4 p-4 sm:grid-cols-3 sm:p-6 md:p-8">
             {shareHeroStats.map((stat) => (
               <div
                 key={stat.kicker}
