@@ -22,24 +22,27 @@ export default function ShareHero() {
           </p>
         </div>
 
-        <div className="relative mt-12 overflow-hidden rounded-3xl">
+        <div className="relative mt-12 overflow-hidden rounded-3xl bg-stone-900">
           <img
             src="/photography.jpg"
             alt="Creators filming among Himalayan peaks and prayer flags"
-            className="absolute inset-0 h-full w-full object-cover"
+            className="h-[420px] w-full object-cover sm:h-[520px] md:h-[600px]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/65 to-stone-950/45" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 top-1/3 bg-gradient-to-t from-stone-950/90 via-stone-950/45 to-transparent" />
 
-          <div className="relative grid gap-8 p-8 sm:grid-cols-3 md:p-10">
+          <div className="absolute inset-x-0 bottom-0 grid gap-4 p-4 sm:grid-cols-3 sm:p-6 md:p-8">
             {shareHeroStats.map((stat) => (
-              <div key={stat.kicker}>
+              <div
+                key={stat.kicker}
+                className="rounded-2xl border border-white/10 bg-stone-950/55 p-5 backdrop-blur-sm"
+              >
                 <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-300">
                   {stat.kicker}
                 </span>
-                <div className="mt-2 text-4xl font-bold text-white">
+                <div className="mt-1.5 text-3xl font-bold text-white">
                   {stat.value}
                 </div>
-                <p className="mt-2 text-xs leading-relaxed text-stone-300">
+                <p className="mt-1.5 text-xs leading-relaxed text-stone-300">
                   {stat.label}
                 </p>
               </div>

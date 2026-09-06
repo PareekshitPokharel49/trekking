@@ -354,12 +354,12 @@ export const shareStages: ShareStage[] = [
 export const shareTestimonial = {
   quote:
     "Seeing my Everest trail photography fund winter medical supplies for local porters while giving me fair compensation changed how I view travel storytelling.",
-  name: "Lucas M.",
+  name: "Valentin Klopfenstein",
   role: "Visual Contributor & Expedition Cinematographer",
   location: "Khumbu Region & Namche Bazaar",
-  image: "", // optional — a placeholder shows until a contributor photo is added
+  image: "/everesttrail.jpg",
   stats: [
-    { value: "$4,850", label: "Total co-licensing royalties" },
+    { value: "$150", label: "Total co-licensing royalties" },
     { value: "48 families", label: "Provided alpine first-aid kits" },
   ],
 };
