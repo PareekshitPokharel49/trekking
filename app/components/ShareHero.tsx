@@ -24,7 +24,7 @@ export default function ShareHero() {
 
         <div className="relative mt-12 overflow-hidden rounded-3xl">
           <img
-            src="/NepalHome.jpg"
+            src="/photography.jpg"
             alt="Creators filming among Himalayan peaks and prayer flags"
             className="absolute inset-0 h-full w-full object-cover"
           />
