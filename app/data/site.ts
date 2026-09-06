@@ -50,7 +50,7 @@ export type Relief = {
 export const siteName = "Call From Himalaya";
 
 export const navLinks: NavLink[] = [
-  { label: "Explore", href: "/#destinations" },
+  { label: "Explore", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Volunteer", href: "/volunteer" },
   { label: "Relief", href: "/#relief" },
