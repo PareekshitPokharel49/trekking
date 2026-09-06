@@ -69,7 +69,7 @@ export const heroStats: HeroStat[] = [
 export const heroSlides: HeroSlide[] = [
   {
     // Slide 1 — tourism
-    image: "/NepaliCulture.jpg",
+    image: "/NepalHome.jpg",
     badge: "40+ routes • Departures year-round",
     title: "Where the sky touches the earth",
     description:
