@@ -11,6 +11,7 @@ export type HeroSlide = {
   description: string;
   primaryCta: CtaLink;
   secondaryCta: CtaLink;
+  stats?: HeroStat[]; // optional — overrides the shared heroStats for this slide
 };
 
 export type MissionPillar = {
@@ -75,22 +76,34 @@ export const heroSlides: HeroSlide[] = [
     secondaryCta: { label: "Support the cause", href: "/#relief" },
   },
   {
-    image: "/Annapurna.jpg",
-    badge: "Slide 2 • placeholder",
-    title: "Your headline for the second slide",
+    image: "/Home2.jpg",
+    badge: "Back-to-school appeal",
+    title: "Every mountain child deserves a full school bag",
     description:
-      "Placeholder copy for slide two. Send me the final wording and image and I will drop them straight in here.",
-    primaryCta: { label: "Primary action", href: "#" },
-    secondaryCta: { label: "Secondary action", href: "#" },
+      "In remote Himalayan villages, school-going children walk for hours to classrooms that lack books, stationery, and warm clothing. Your gift buys textbooks, notebooks, shoes, and winter layers so they can keep learning.",
+    primaryCta: {
+      label: "Donate school supplies",
+      href: "https://pmdrf.nchl.com.np/",
+    },
+    secondaryCta: { label: "How your gift helps", href: "/mission" },
   },
   {
-    image: "/Kathmandu.jpg",
-    badge: "Slide 3 • placeholder",
-    title: "Your headline for the third slide",
+    image: "/Home3.jpg",
+    badge: "Emergency • Rasuwa flood",
+    title: "Rasuwa flood relief: families need help before winter",
     description:
-      "Placeholder copy for slide three. Send me the final wording and image and I will drop them straight in here.",
-    primaryCta: { label: "Primary action", href: "#" },
-    secondaryCta: { label: "Secondary action", href: "#" },
+      "A glacial flash flood tore through the Rasuwagadhi corridor, sweeping away homes, bridges, and livelihoods along the Bhotekoshi. Survivors need shelter, food, and medical care right now.",
+    primaryCta: {
+      label: "Donate to flood relief",
+      href: "https://pmdrf.nchl.com.np/",
+    },
+    secondaryCta: { label: "Where funds go", href: "/mission" },
+    // TODO: replace with confirmed figures from the official Rasuwa flood report
+    stats: [
+      { value: "TBC", label: "Lives lost" },
+      { value: "TBC", label: "Injured" },
+      { value: "TBC", label: "Estimated losses" },
+    ],
   },
 ];
 

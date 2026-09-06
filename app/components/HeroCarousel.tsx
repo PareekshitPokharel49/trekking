@@ -27,6 +27,7 @@ export default function HeroCarousel() {
   }, [count]);
 
   const slide = heroSlides[active];
+  const stats = slide.stats ?? heroStats;
 
   return (
     <section
@@ -79,7 +80,7 @@ export default function HeroCarousel() {
           </div>
 
           <dl className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-white/15 pt-6">
-            {heroStats.map((stat) => (
+            {stats.map((stat) => (
               <div key={stat.label}>
                 <dt className="text-2xl font-bold">{stat.value}</dt>
                 <dd className="mt-1 text-xs text-stone-300">{stat.label}</dd>
