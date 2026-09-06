@@ -1,11 +1,11 @@
-import Hero from "@/app/components/Hero";
+import HeroCarousel from "@/app/components/HeroCarousel";
 import Destinations from "@/app/components/Destinations";
 import ReliefAppeal from "@/app/components/ReliefAppeal";
 
 export default function Home() {
   return (
     <>
-      <Hero />
+      <HeroCarousel />
       <Destinations />
       <ReliefAppeal />
     </>
