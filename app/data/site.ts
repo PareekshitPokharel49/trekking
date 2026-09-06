@@ -54,7 +54,6 @@ export const navLinks: NavLink[] = [
   { label: "About Us", href: "/about" },
   { label: "Volunteer", href: "/volunteer" },
   { label: "Relief", href: "/#relief" },
-  { label: "Contact", href: "/#footer" },
 ];
 
 export const heroStats: HeroStat[] = [

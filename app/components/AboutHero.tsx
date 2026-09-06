@@ -7,7 +7,7 @@ export default function AboutHero() {
       <img
         src="/NepaliCulture.jpg"
         alt="Nepali cultural life beneath the Himalayas"
-        className="absolute inset-0 -z-10 h-full w-full object-cover"
+        className="absolute inset-0 -z-10 h-full w-full object-cover object-top"
       />
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/75 via-black/55 to-black/75" />
 
