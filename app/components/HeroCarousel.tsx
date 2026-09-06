@@ -1,17 +1,27 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Container from "@/app/components/Container";
 import { heroSlides, heroStats } from "@/app/data/site";
 
-const AUTOPLAY_MS = 6000;
+// Time each slide stays on screen. The content transition below runs for
+// ~700ms after a short delay, so 5s leaves a clear pause between moves.
+const AUTOPLAY_MS = 5000;
 
 export default function HeroCarousel() {
   const count = heroSlides.length;
   const [active, setActive] = useState(0);
+  const [prev, setPrev] = useState<number | null>(null);
+  const activeRef = useRef(0);
 
-  const goTo = useCallback(
-    (i: number) => setActive((i + count) % count),
+  const change = useCallback(
+    (next: number) => {
+      const n = ((next % count) + count) % count;
+      if (n === activeRef.current) return;
+      setPrev(activeRef.current);
+      activeRef.current = n;
+      setActive(n);
+    },
     [count]
   );
 
@@ -20,11 +30,11 @@ export default function HeroCarousel() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const id = window.setInterval(
-      () => setActive((i) => (i + 1) % count),
+      () => change(activeRef.current + 1),
       AUTOPLAY_MS
     );
     return () => window.clearInterval(id);
-  }, [count]);
+  }, [count, change]);
 
   return (
     <section
@@ -47,18 +57,27 @@ export default function HeroCarousel() {
 
       <Container className="py-16 md:py-20">
         {/* Every slide occupies the same grid cell, so the hero keeps the
-            height of its tallest slide and never shifts as slides advance. */}
-        <div className="grid">
+            height of its tallest slide and never shifts between slides.
+            The active slide slides in from the right; the outgoing one
+            slides off to the left. */}
+        <div className="grid overflow-hidden">
           {heroSlides.map((slide, i) => {
             const isActive = i === active;
+            const isLeaving = i === prev && !isActive;
             const stats = slide.stats ?? heroStats;
+
+            const motion = isActive
+              ? "translate-x-0 opacity-100 delay-150"
+              : isLeaving
+                ? "-translate-x-12 opacity-0"
+                : "translate-x-12 opacity-0";
 
             return (
               <div
                 key={slide.title}
                 aria-hidden={!isActive}
-                className={`col-start-1 row-start-1 max-w-2xl text-white transition-opacity duration-500 ${
-                  isActive ? "opacity-100" : "pointer-events-none opacity-0"
+                className={`col-start-1 row-start-1 max-w-2xl text-white transition-all duration-700 ease-out motion-reduce:transition-none ${motion} ${
+                  isActive ? "" : "pointer-events-none"
                 }`}
               >
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-medium backdrop-blur">
@@ -112,7 +131,7 @@ export default function HeroCarousel() {
       {/* Prev / next */}
       <button
         type="button"
-        onClick={() => goTo(active - 1)}
+        onClick={() => change(active - 1)}
         aria-label="Previous slide"
         className="absolute left-4 top-1/2 hidden -translate-y-1/2 rounded-full border border-white/30 bg-black/20 p-2 text-white backdrop-blur transition-colors hover:bg-black/40 md:block"
       >
@@ -122,7 +141,7 @@ export default function HeroCarousel() {
       </button>
       <button
         type="button"
-        onClick={() => goTo(active + 1)}
+        onClick={() => change(active + 1)}
         aria-label="Next slide"
         className="absolute right-4 top-1/2 hidden -translate-y-1/2 rounded-full border border-white/30 bg-black/20 p-2 text-white backdrop-blur transition-colors hover:bg-black/40 md:block"
       >
@@ -137,7 +156,7 @@ export default function HeroCarousel() {
           <button
             key={slide.title}
             type="button"
-            onClick={() => goTo(i)}
+            onClick={() => change(i)}
             aria-label={`Go to slide ${i + 1}`}
             aria-current={i === active}
             className={`h-2 rounded-full transition-all ${
