@@ -53,6 +53,7 @@ export const navLinks: NavLink[] = [
   { label: "Explore", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Volunteer", href: "/volunteer" },
+  { label: "Share Experience", href: "/share-experience" },
   { label: "Relief", href: "/#relief" },
 ];
 
@@ -293,4 +294,88 @@ export const volunteerCountries = [
   "United Kingdom",
   "United States",
   "Other",
+];
+
+// --- Share Your Experience page (route /share-experience) ---
+
+export type ShareHeroStat = { kicker: string; value: string; label: string };
+export type ShareStage = {
+  stage: string;
+  title: string;
+  description: string;
+  note: string;
+};
+
+export const shareHeroStats: ShareHeroStat[] = [
+  {
+    kicker: "Direct Return",
+    value: "50%",
+    label:
+      "Creator royalty paid directly to you for syndication and commercial licensing rights.",
+  },
+  {
+    kicker: "Regenerative Care",
+    value: "50%",
+    label:
+      "Frontline Relief Fund providing high-altitude porter healthcare and village reconstruction.",
+  },
+  {
+    kicker: "Public Audit",
+    value: "100%",
+    label:
+      "Transparent ledger published quarterly with on-chain and banking verification proof.",
+  },
+];
+
+export const shareStages: ShareStage[] = [
+  {
+    stage: "Stage 01",
+    title: "Submit Your Media",
+    description:
+      "Upload photography, raw drone clips, or documentary footage of Nepal's peaks, ancient villages, trails, and cultural celebrations via our streamlined review portal.",
+    note: "Original RAW or 4K/ProRes",
+  },
+  {
+    stage: "Stage 02",
+    title: "Ethical Licensing",
+    description:
+      "Our editorial desk curates and syndicates accepted content to global media, outdoor adventure brands, and sustainable eco-travel campaigns with guaranteed fair-market rates.",
+    note: "You retain master copyright",
+  },
+  {
+    stage: "Stage 03",
+    title: "Dual-Impact Payout",
+    description:
+      "Upon receipt of licensing revenue, 50% flows straight to your bank via Stripe or Wise, while 50% is delivered to active field relief projects with auditable delivery slips.",
+    note: "Direct community verification",
+  },
+];
+
+export const shareTestimonial = {
+  quote:
+    "Seeing my Everest trail photography fund winter medical supplies for local porters while giving me fair compensation changed how I view travel storytelling.",
+  name: "Lucas M.",
+  role: "Visual Contributor & Expedition Cinematographer",
+  location: "Khumbu Region & Namche Bazaar",
+  image: "", // optional — a placeholder shows until a contributor photo is added
+  stats: [
+    { value: "$4,850", label: "Total co-licensing royalties" },
+    { value: "48 families", label: "Provided alpine first-aid kits" },
+  ],
+};
+
+export const shareContentTypes = [
+  "Photography (Landscape/Culture)",
+  "Cinematic Video / Drone",
+  "Travel Essays & Stories",
+  "Mixed Multimedia",
+];
+
+export const shareRegions = [
+  "Everest / Khumbu",
+  "Annapurna Circuit",
+  "Trishuli Valley",
+  "Langtang Valley",
+  "Kathmandu Valley & Heritage",
+  "Dolpo / Western Nepal",
 ];
