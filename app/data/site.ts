@@ -12,6 +12,7 @@ export type HeroSlide = {
   primaryCta: CtaLink;
   secondaryCta: CtaLink;
   stats?: HeroStat[]; // optional — overrides the shared heroStats for this slide
+  statsNote?: string; // optional caption under the stats (e.g. a source line)
 };
 
 export type MissionPillar = {
@@ -62,25 +63,32 @@ export const heroStats: HeroStat[] = [
   { value: "$1.2M", label: "Relief delivered" },
 ];
 
-// Homepage hero carousel. At least 3 slides; text changes with the image.
-// Images below are temporary placeholders — replace `image` with the assets
-// you send, and swap the copy per slide.
+// Homepage hero carousel. Three slides; badge, copy, CTAs and stats all
+// change with the image. Slide heights are locked in HeroCarousel so the
+// page never shifts as slides advance.
 export const heroSlides: HeroSlide[] = [
   {
+    // Slide 1 — tourism
     image: "/NepalHome.jpg",
-    badge: "Trips running • Relief fund open",
+    badge: "40+ routes • Departures year-round",
     title: "Where the sky touches the earth",
     description:
-      "Experience the breathtaking landscapes and vibrant culture of the Himalayas while making a lasting impact on local communities.",
+      "Trek legendary trails, wander ancient temple cities, and watch first light set an 8,000-metre skyline on fire. Small groups, expert local guides, a route for every season.",
     primaryCta: { label: "Explore destinations", href: "/#destinations" },
-    secondaryCta: { label: "Support the cause", href: "/#relief" },
+    secondaryCta: { label: "See all trips", href: "/#destinations" },
+    stats: [
+      { value: "40+", label: "Guided routes" },
+      { value: "3", label: "Regions to explore" },
+      { value: "12 yrs", label: "Local expertise" },
+    ],
   },
   {
+    // Slide 2 — school-supplies appeal (Home2.jpg)
     image: "/Home2.jpg",
     badge: "Back-to-school appeal",
-    title: "Every mountain child deserves a full school bag",
+    title: "Fill a mountain child's school bag",
     description:
-      "In remote Himalayan villages, school-going children walk for hours to classrooms that lack books, stationery, and warm clothing. Your gift buys textbooks, notebooks, shoes, and winter layers so they can keep learning.",
+      "In remote Himalayan villages, school-going children study without books, stationery, shoes, or warm clothes. Your gift carries textbooks and winter layers up the trail so they can keep learning.",
     primaryCta: {
       label: "Donate school supplies",
       href: "https://pmdrf.nchl.com.np/",
@@ -88,22 +96,26 @@ export const heroSlides: HeroSlide[] = [
     secondaryCta: { label: "How your gift helps", href: "/mission" },
   },
   {
+    // Slide 3 — Rasuwa flood emergency (Home3.jpg).
+    // Figures: Nepal NDRRMA situation update, 2 September 2026. Update as the
+    // official toll changes: https://ndrrma.gov.np
     image: "/Home3.jpg",
-    badge: "Emergency • Rasuwa flood",
-    title: "Rasuwa flood relief: families need help before winter",
+    badge: "Emergency appeal • Rasuwa–Bhotekoshi flood",
+    title: "Rasuwa flood relief can't wait",
     description:
-      "A glacial flash flood tore through the Rasuwagadhi corridor, sweeping away homes, bridges, and livelihoods along the Bhotekoshi. Survivors need shelter, food, and medical care right now.",
+      "A glacial surge down the Bhotekoshi tore through homes, roads, and hydropower across eight districts. Survivors need shelter, food, and medical care right now.",
     primaryCta: {
       label: "Donate to flood relief",
       href: "https://pmdrf.nchl.com.np/",
     },
     secondaryCta: { label: "Where funds go", href: "/mission" },
-    // TODO: replace with confirmed figures from the official Rasuwa flood report
     stats: [
-      { value: "TBC", label: "Lives lost" },
-      { value: "TBC", label: "Injured" },
-      { value: "TBC", label: "Estimated losses" },
+      { value: "1,114", label: "Lives lost" },
+      { value: "3,916", label: "People missing" },
+      { value: "267", label: "Injured" },
     ],
+    statsNote:
+      "Source: Nepal NDRRMA, as of 2 September 2026 — figures are still being updated.",
   },
 ];
 

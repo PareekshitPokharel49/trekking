@@ -26,67 +26,86 @@ export default function HeroCarousel() {
     return () => window.clearInterval(id);
   }, [count]);
 
-  const slide = heroSlides[active];
-  const stats = slide.stats ?? heroStats;
-
   return (
     <section
       id="top"
-      className="relative isolate flex min-h-[640px] items-center overflow-hidden"
+      className="relative isolate flex min-h-[600px] items-center overflow-hidden md:min-h-[640px]"
     >
       {/* Cross-fading background images */}
-      {heroSlides.map((s, i) => (
+      {heroSlides.map((slide, i) => (
         <div
-          key={s.title}
+          key={slide.title}
           aria-hidden={i !== active}
           className={`absolute inset-0 -z-10 transition-opacity duration-700 ease-in-out ${
             i === active ? "opacity-100" : "opacity-0"
           }`}
         >
-          <img src={s.image} alt="" className="h-full w-full object-cover" />
+          <img src={slide.image} alt="" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/45 to-black/75" />
         </div>
       ))}
 
-      <Container className="py-24">
-        {/* key forces a re-mount so the copy fades in with each slide */}
-        <div key={active} className="max-w-2xl text-white [animation:heroIn_.6s_ease-out]">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-medium backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            {slide.badge}
-          </span>
+      <Container className="py-16 md:py-20">
+        {/* Every slide occupies the same grid cell, so the hero keeps the
+            height of its tallest slide and never shifts as slides advance. */}
+        <div className="grid">
+          {heroSlides.map((slide, i) => {
+            const isActive = i === active;
+            const stats = slide.stats ?? heroStats;
 
-          <h1 className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight md:text-6xl">
-            {slide.title}
-          </h1>
+            return (
+              <div
+                key={slide.title}
+                aria-hidden={!isActive}
+                className={`col-start-1 row-start-1 max-w-2xl text-white transition-opacity duration-500 ${
+                  isActive ? "opacity-100" : "pointer-events-none opacity-0"
+                }`}
+              >
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-medium backdrop-blur">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  {slide.badge}
+                </span>
 
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-stone-200">
-            {slide.description}
-          </p>
+                <h1 className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight md:text-6xl">
+                  {slide.title}
+                </h1>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={slide.primaryCta.href}
-              className="rounded-full bg-white px-6 py-3 text-center font-semibold text-stone-900 transition-colors hover:bg-stone-100"
-            >
-              {slide.primaryCta.label}
-            </a>
-            <a
-              href={slide.secondaryCta.href}
-              className="rounded-full border border-white/30 px-6 py-3 text-center font-semibold text-white transition-colors hover:bg-white/10"
-            >
-              {slide.secondaryCta.label}
-            </a>
-          </div>
+                <p className="mt-5 max-w-xl text-lg leading-relaxed text-stone-200">
+                  {slide.description}
+                </p>
 
-          <dl className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-white/15 pt-6">
-            {stats.map((stat) => (
-              <div key={stat.label}>
-                <dt className="text-2xl font-bold">{stat.value}</dt>
-                <dd className="mt-1 text-xs text-stone-300">{stat.label}</dd>
+                <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                  <a
+                    href={slide.primaryCta.href}
+                    className="rounded-full bg-white px-6 py-3 text-center font-semibold text-stone-900 transition-colors hover:bg-stone-100"
+                  >
+                    {slide.primaryCta.label}
+                  </a>
+                  <a
+                    href={slide.secondaryCta.href}
+                    className="rounded-full border border-white/30 px-6 py-3 text-center font-semibold text-white transition-colors hover:bg-white/10"
+                  >
+                    {slide.secondaryCta.label}
+                  </a>
+                </div>
+
+                <dl className="mt-8 grid max-w-md grid-cols-3 gap-6 border-t border-white/15 pt-5">
+                  {stats.map((stat) => (
+                    <div key={stat.label}>
+                      <dt className="text-2xl font-bold">{stat.value}</dt>
+                      <dd className="mt-1 text-xs text-stone-300">{stat.label}</dd>
+                    </div>
+                  ))}
+                </dl>
+
+                {slide.statsNote && (
+                  <p className="mt-3 max-w-md text-[11px] leading-snug text-stone-400">
+                    {slide.statsNote}
+                  </p>
+                )}
               </div>
-            ))}
-          </dl>
+            );
+          })}
         </div>
       </Container>
 
@@ -114,9 +133,9 @@ export default function HeroCarousel() {
 
       {/* Dots */}
       <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 gap-2.5">
-        {heroSlides.map((s, i) => (
+        {heroSlides.map((slide, i) => (
           <button
-            key={s.title}
+            key={slide.title}
             type="button"
             onClick={() => goTo(i)}
             aria-label={`Go to slide ${i + 1}`}
