@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
-import MissionHero from "@/app/components/MissionHero";
+import AboutHero from "@/app/components/AboutHero";
 import OperatingPillars from "@/app/components/OperatingPillars";
 import OpenForum from "@/app/components/OpenForum";
-import MissionCta from "@/app/components/MissionCta";
+import AboutCta from "@/app/components/AboutCta";
 
 export const metadata: Metadata = {
-  title: "Our Mission & Purpose — Call From Himalaya",
+  title: "About Us — Call From Himalaya",
   description:
     "Direct action, unbroken kinship — how we deliver unmediated crisis relief and community-guided rebuilding across the Himalayas.",
 };
 
-export default function MissionPage() {
+export default function AboutPage() {
   return (
     <>
-      <MissionHero />
+      <AboutHero />
       <OperatingPillars />
       <OpenForum />
-      <MissionCta />
+      <AboutCta />
     </>
   );
 }

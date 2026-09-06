@@ -43,7 +43,7 @@ export default function OpenForum() {
                     <span className="font-semibold text-stone-900">
                       {post.name}
                     </span>
-                    <span className="rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700">
+                    <span className="rounded-full bg-brand-50 px-2 py-0.5 text-xs font-medium text-brand-700">
                       {post.role}
                     </span>
                     <span className="text-xs text-stone-400">{post.time}</span>

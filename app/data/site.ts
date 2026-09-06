@@ -51,7 +51,7 @@ export const siteName = "Call From Himalaya";
 
 export const navLinks: NavLink[] = [
   { label: "Explore", href: "/#destinations" },
-  { label: "Donate", href: "/mission" },
+  { label: "About Us", href: "/about" },
   { label: "Volunteer", href: "/volunteer" },
   { label: "Relief", href: "/#relief" },
   { label: "Contact", href: "/#footer" },
@@ -69,7 +69,7 @@ export const heroStats: HeroStat[] = [
 export const heroSlides: HeroSlide[] = [
   {
     // Slide 1 — tourism
-    image: "/NepalHome.jpg",
+    image: "/NepaliCulture.jpg",
     badge: "40+ routes • Departures year-round",
     title: "Where the sky touches the earth",
     description:
@@ -93,7 +93,7 @@ export const heroSlides: HeroSlide[] = [
       label: "Donate school supplies",
       href: "https://pmdrf.nchl.com.np/",
     },
-    secondaryCta: { label: "How your gift helps", href: "/mission" },
+    secondaryCta: { label: "How your gift helps", href: "/about" },
   },
   {
     // Slide 3 — Rasuwa flood emergency (Home3.jpg).
@@ -108,7 +108,7 @@ export const heroSlides: HeroSlide[] = [
       label: "Donate to flood relief",
       href: "https://pmdrf.nchl.com.np/",
     },
-    secondaryCta: { label: "Where funds go", href: "/mission" },
+    secondaryCta: { label: "Where funds go", href: "/about" },
     stats: [
       { value: "1,114", label: "Lives lost" },
       { value: "3,916", label: "People missing" },
@@ -207,9 +207,9 @@ export const volunteerRoles = [
   "General Support",
 ] as const;
 
-// --- Mission & Purpose page (linked from the "Donate" nav item) ---
+// --- About Us page (linked from the "About Us" nav item, route /about) ---
 
-export const missionIntro = {
+export const aboutIntro = {
   eyebrow: "Our Mission & Purpose",
   titleLead: "Direct action.",
   titleEmphasis: "Unbroken kinship.",
@@ -225,6 +225,7 @@ export const operatingPillars: MissionPillar[] = [
     description:
       "When landslides, winter isolations, or flash floods strike, Nepali professionals and allies across 30+ countries unite with urgency. We pool direct relief capital, coordinate medical tele-support, and wire funds directly to ground crews within hours.",
     stat: "Mobilized in hours during crises",
+    image: "/Pillar1.jpg",
   },
   {
     index: "02",
@@ -232,6 +233,7 @@ export const operatingPillars: MissionPillar[] = [
     description:
       "We bypass cumbersome bureaucratic intermediaries and NGO overhead. Relief priorities are defined strictly by village matriarchs, trekking guides, trail porters, and rural teachers who live the realities and know their valley's exact rebuilding needs.",
     stat: "100% community sign-off mandate",
+    image: "/Pillar2.jpg",
   },
   {
     index: "03",
@@ -239,6 +241,7 @@ export const operatingPillars: MissionPillar[] = [
     description:
       "An open space where global supporters, conscious trekkers, diaspora organizers, and mountain residents interact as equals. Members exchange live weather reports, share village stories, track expenditures, and co-plan local restoration projects.",
     stat: "Direct communication & live ledger",
+    image: "/Pillar3.jpg",
   },
 ];
 
@@ -269,7 +272,7 @@ export const forumPosts: ForumPost[] = [
   },
 ];
 
-export const missionCta = {
+export const aboutCta = {
   eyebrow: "Stand With the Mountain",
   title: "Join Our Circle of Action",
   description:
