@@ -69,10 +69,12 @@ Open `https://callfromhimalaya.org` — Caddy fetches a certificate automaticall
 | `SSH_USER`                        | SSH user (in the `docker` group)                              |
 | `SSH_KEY`                         | private key whose public half is on the VPS                   |
 | `SSH_PORT`                        | optional, defaults to `22`                                    |
-| `NEXT_PUBLIC_EMAILJS_SERVICE_ID`  | from EmailJS                                                  |
-| `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID` | from EmailJS                                                  |
-| `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`  | from EmailJS                                                  |
 | `GHCR_USER` / `GHCR_TOKEN`        | only if the image package is private (PAT: `read:packages`)   |
+
+The EmailJS keys are baked into `app/lib/submitForm.ts` as defaults, so no
+EmailJS secrets are required. To rotate them without a code change, set
+`NEXT_PUBLIC_EMAILJS_SERVICE_ID` / `_TEMPLATE_ID` / `_PUBLIC_KEY` as Actions
+secrets (they are already passed as build args in the workflow).
 
 `GITHUB_TOKEN` is provided automatically and pushes the image to GHCR. Making
 the GHCR package public lets you skip `GHCR_USER` / `GHCR_TOKEN`.

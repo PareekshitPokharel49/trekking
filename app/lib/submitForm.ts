@@ -3,9 +3,15 @@
 
 import emailjs from "@emailjs/browser";
 
-const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+// EmailJS "public" credentials — safe to ship in client code. Sending is
+// locked to the site's domain in EmailJS → Account → Security → Allowed
+// Origins. Override with NEXT_PUBLIC_EMAILJS_* env vars if the keys change.
+const SERVICE_ID =
+  process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_7dr2na9";
+const TEMPLATE_ID =
+  process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_uylg8qj";
+const PUBLIC_KEY =
+  process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "7Vv80XxRYBhBi7jsT";
 
 // Field order + human labels used to build the {{message}} body.
 const LABELS: Record<"volunteer" | "share", Record<string, string>> = {
