@@ -45,11 +45,15 @@ export async function submitForm(
   // Honeypot — silently accept and drop bot submissions.
   if ((fields.company?.[0] ?? "").trim() !== "") return;
 
+  // Escape so user text can't break the HTML email template.
+  const esc = (s: string) =>
+    s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
   const labels = LABELS[type];
   const lines = Object.keys(labels)
     .map((key) => {
       const val = (fields[key] ?? []).filter((v) => v.trim() !== "").join(", ");
-      return val ? `${labels[key]}: ${val}` : "";
+      return val ? `${labels[key]}: ${esc(val)}` : "";
     })
     .filter(Boolean);
 
@@ -58,9 +62,10 @@ export async function submitForm(
       type === "volunteer"
         ? "Volunteer application"
         : "Share Your Experience submission",
-    from_name: fields.fullName?.[0] ?? "",
+    from_name: esc(fields.fullName?.[0] ?? ""),
     reply_to: fields.email?.[0] ?? "",
     message: lines.join("\n"),
+    date: new Date().toLocaleString(),
   };
 
   try {
