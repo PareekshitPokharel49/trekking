@@ -49,21 +49,21 @@ export async function submitForm(
   const esc = (s: string) =>
     s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
+  // Every field for this form is always listed; blanks show as an em dash.
   const labels = LABELS[type];
-  const lines = Object.keys(labels)
-    .map((key) => {
-      const val = (fields[key] ?? []).filter((v) => v.trim() !== "").join(", ");
-      return val ? `${labels[key]}: ${esc(val)}` : "";
-    })
-    .filter(Boolean);
+  const lines = Object.keys(labels).map((key) => {
+    let val = (fields[key] ?? []).filter((v) => v.trim() !== "").join(", ");
+    if (key === "agree") val = fields.agree?.length ? "Yes" : "No";
+    return `${labels[key]}: ${val ? esc(val) : "—"}`;
+  });
 
   const params = {
     form_type:
       type === "volunteer"
         ? "Volunteer application"
         : "Share Your Experience submission",
-    from_name: esc(fields.fullName?.[0] ?? ""),
-    reply_to: fields.email?.[0] ?? "",
+    from_name: esc(fields.fullName?.[0] ?? "—"),
+    reply_to: fields.email?.[0] ?? "—",
     message: lines.join("\n"),
     date: new Date().toLocaleString(),
   };
