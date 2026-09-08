@@ -1,0 +1,8 @@
+# Caddy terminates TLS (auto Let's Encrypt) and proxies to the Next.js container.
+# SITE_ADDRESS comes from .env, e.g. "callfromhimalaya.org" or
+# "callfromhimalaya.org, www.callfromhimalaya.org".
+
+{$SITE_ADDRESS} {
+	encode zstd gzip
+	reverse_proxy web:3000
+}

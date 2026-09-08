@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { FormEvent, ReactNode } from "react";
 import { volunteerCountries, volunteerRoles } from "@/app/data/site";
+import { submitForm } from "@/app/lib/submitForm";
 
 const inputClass =
   "w-full rounded-xl border border-stone-300 bg-white px-4 py-2.5 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-brand-600 focus:ring-2 focus:ring-brand-100";
@@ -20,11 +21,22 @@ function Field({ label, children }: { label: string; children: ReactNode }) {
 
 export default function VolunteerForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // No backend yet — capture intent locally and show confirmation.
-    setSubmitted(true);
+    const form = event.currentTarget;
+    setSending(true);
+    setError("");
+    try {
+      await submitForm("volunteer", form);
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setSending(false);
+    }
   }
 
   if (submitted) {
@@ -70,6 +82,15 @@ export default function VolunteerForm() {
       <h2 className="text-center text-2xl font-bold tracking-tight text-stone-900">
         Register Your Interest
       </h2>
+
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <Field label="Full Name">
@@ -145,12 +166,19 @@ export default function VolunteerForm() {
         </Field>
       </div>
 
+      {error && (
+        <p className="mt-4 rounded-xl bg-brand-50 px-4 py-3 text-sm text-brand-700">
+          {error}
+        </p>
+      )}
+
       <button
         type="submit"
-        className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-stone-900 px-6 py-3 font-semibold text-white transition-colors hover:bg-stone-700"
+        disabled={sending}
+        className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-stone-900 px-6 py-3 font-semibold text-white transition-colors hover:bg-stone-700 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        Submit Application
-        <span aria-hidden="true">→</span>
+        {sending ? "Submitting…" : "Submit Application"}
+        {!sending && <span aria-hidden="true">→</span>}
       </button>
 
       <p className="mt-3 text-center text-xs text-stone-500">

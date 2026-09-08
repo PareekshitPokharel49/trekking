@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { FormEvent, ReactNode } from "react";
 import Container from "@/app/components/Container";
 import { shareContentTypes, shareRegions, siteName } from "@/app/data/site";
+import { submitForm } from "@/app/lib/submitForm";
 
 const inputClass =
   "w-full rounded-xl border border-stone-300 bg-white px-4 py-2.5 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-brand-600 focus:ring-2 focus:ring-brand-100";
@@ -24,11 +25,22 @@ function Field({ label, children }: { label: string; children: ReactNode }) {
 
 export default function ShareForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // No backend yet — capture intent locally and show confirmation.
-    setSubmitted(true);
+    const form = event.currentTarget;
+    setSending(true);
+    setError("");
+    try {
+      await submitForm("share", form);
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -75,6 +87,15 @@ export default function ShareForm() {
             onSubmit={handleSubmit}
             className="mx-auto mt-10 max-w-3xl rounded-2xl border border-stone-200 bg-white p-6 shadow-sm md:p-8"
           >
+            <input
+              type="text"
+              name="company"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="hidden"
+            />
+
             <div className="grid gap-4 sm:grid-cols-2">
               <Field label="Full Name">
                 <input
@@ -176,12 +197,19 @@ export default function ShareForm() {
               </span>
             </label>
 
+            {error && (
+              <p className="mt-4 rounded-xl bg-brand-50 px-4 py-3 text-sm text-brand-700">
+                {error}
+              </p>
+            )}
+
             <button
               type="submit"
-              className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-stone-900 px-6 py-3 font-semibold text-white transition-colors hover:bg-stone-700"
+              disabled={sending}
+              className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-stone-900 px-6 py-3 font-semibold text-white transition-colors hover:bg-stone-700 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              Submit Your Experience &amp; Join Program
-              <span aria-hidden="true">→</span>
+              {sending ? "Submitting…" : "Submit Your Experience & Join Program"}
+              {!sending && <span aria-hidden="true">→</span>}
             </button>
           </form>
         )}
