@@ -49,6 +49,19 @@ export type Relief = {
 
 export const siteName = "Call From Himalaya";
 
+export type SocialLink = { label: string; href: string };
+
+export const socialLinks: { facebook: SocialLink; instagram: SocialLink } = {
+  facebook: {
+    label: "Facebook",
+    href: "https://www.facebook.com/share/1McxjupecL/",
+  },
+  instagram: {
+    label: "Instagram",
+    href: "https://www.instagram.com/callfrom.himalaya?stkn=MWN2d2UzOHh3YWZsOA==",
+  },
+};
+
 export const navLinks: NavLink[] = [
   { label: "Explore", href: "/" },
   { label: "About Us", href: "/about" },
