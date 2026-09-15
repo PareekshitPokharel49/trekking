@@ -56,12 +56,6 @@ export default function ReliefAppeal() {
             >
               Donate to Relief Fund
             </a>
-            <a
-              href="#"
-              className="rounded-full border border-stone-300 px-6 py-3 text-center font-semibold text-stone-900 transition-colors hover:bg-stone-100"
-            >
-              Read Impact Report
-            </a>
           </div>
         </div>
 
