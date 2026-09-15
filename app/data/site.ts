@@ -377,18 +377,3 @@ export const shareTestimonial = {
   ],
 };
 
-export const shareContentTypes = [
-  "Photography (Landscape/Culture)",
-  "Cinematic Video / Drone",
-  "Travel Essays & Stories",
-  "Mixed Multimedia",
-];
-
-export const shareRegions = [
-  "Everest / Khumbu",
-  "Annapurna Circuit",
-  "Trishuli Valley",
-  "Langtang Valley",
-  "Kathmandu Valley & Heritage",
-  "Dolpo / Western Nepal",
-];

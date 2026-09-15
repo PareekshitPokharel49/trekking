@@ -3,14 +3,11 @@
 import { useState } from "react";
 import type { FormEvent, ReactNode } from "react";
 import Container from "@/app/components/Container";
-import { shareContentTypes, shareRegions, siteName } from "@/app/data/site";
+import { siteName } from "@/app/data/site";
 import { submitForm } from "@/app/lib/submitForm";
 
 const inputClass =
   "w-full rounded-xl border border-stone-300 bg-white px-4 py-2.5 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-brand-600 focus:ring-2 focus:ring-brand-100";
-
-const optionClass =
-  "flex cursor-pointer items-center gap-2.5 rounded-xl border border-stone-200 px-4 py-3 text-sm text-stone-700 transition-colors has-[:checked]:border-brand-600 has-[:checked]:bg-brand-50";
 
 function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -118,47 +115,6 @@ export default function ShareForm() {
                 />
               </Field>
             </div>
-
-            <fieldset className="mt-4">
-              <legend className="text-sm font-medium text-stone-700">
-                Primary Content Type
-              </legend>
-              <div className="mt-2 grid gap-3 sm:grid-cols-2">
-                {shareContentTypes.map((type) => (
-                  <label key={type} className={optionClass}>
-                    <input
-                      type="radio"
-                      name="contentType"
-                      value={type}
-                      className="accent-brand-700"
-                    />
-                    {type}
-                  </label>
-                ))}
-              </div>
-            </fieldset>
-
-            <fieldset className="mt-4">
-              <legend className="text-sm font-medium text-stone-700">
-                Regions Explored in Nepal{" "}
-                <span className="font-normal text-stone-400">
-                  (select all that apply)
-                </span>
-              </legend>
-              <div className="mt-2 grid gap-3 sm:grid-cols-2">
-                {shareRegions.map((region) => (
-                  <label key={region} className={optionClass}>
-                    <input
-                      type="checkbox"
-                      name="regions"
-                      value={region}
-                      className="accent-brand-700"
-                    />
-                    {region}
-                  </label>
-                ))}
-              </div>
-            </fieldset>
 
             <div className="mt-4">
               <Field label="Portfolio or Cloud Drive Link">

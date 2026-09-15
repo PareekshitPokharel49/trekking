@@ -25,8 +25,6 @@ const LABELS: Record<"volunteer" | "share", Record<string, string>> = {
   share: {
     fullName: "Full name",
     email: "Email",
-    contentType: "Primary content type",
-    regions: "Regions explored",
     portfolio: "Portfolio / drive link",
     story: "Brief story & preferred cause",
     agree: "Agreed to 50/50 terms",
